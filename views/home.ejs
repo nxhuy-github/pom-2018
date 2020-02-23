@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>POM 2018</title>
+        <base href="../" target="">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+            $(document).ready(() => {
+                $( "input" ).on( "dblclick", function() {
+                     $( this ).attr('checked', false);
+                    //alert('Hello');
+                });
+            });
+        </script>
+    </head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <body>
+        <div>
+            Hello world!<br>
+            <form action="/finish", method="post">
+                <table>
+                <tr>
+                    <th>Motif</th>
+                    <th>Coverage</th>
+                    <th>Positive Coverage</th>
+                    <th>Negative Coverage</th>
+                    <!-- <th>Chi-squares χ2</th> -->
+                    <th>Length</th>
+                    <th>Area</th>
+                    <th>Feedback</th>
+                </tr>
+                <% dataTable.forEach((element) => { %>
+                <tr>
+                    <td><%= element.motif %></td>
+                    <td><%= element.coverage %></td>
+                    <td><%= element.pos_cov %></td>
+                    <td><%= element.neg_cov %></td>
+                    <td><%= element.length %></td>
+                    <td><%= element.area %></td>
+                    <td>
+                        <input type="radio" name="<%= element.id %>" value="1"> Like 
+                        <input type="radio" name="<%= element.id %>" value="0"> Dislike
+                    </td>
+                </tr>
+                <% }); %>
+            </table>
+            <input type="hidden" name="storedfile" value="<%= storedfile %>">
+            <input type="submit" name="submit" value="Finish Feedback">
+            </form>
+        </div>
+        <br>
+        <div>
+            Another datasets:
+            <ul>
+                <li><a href="/">My data</a></li>
+                <li><a href="/mushrooms">Mushrooms</a></li>
+                <li><a href="/accidents">Accidents</a></li>
+            </ul>
+        </div>
+    </body>
+</html>
